@@ -67,7 +67,6 @@ for each_data = 1:numel(data_names)
     end
 
     [X, Y, info] = load_dataset(rootDir, dataset);
-    c = info.classes;
 
     for combo_id = start_combo:num_combo
         i = combo(combo_id, 1);
@@ -133,8 +132,6 @@ for each_data = 1:numel(data_names)
             temp_purity(r) = metric.Purity;
             obj_cell{r} = obj;
 
-            fprintf('  run %02d/%02d: ACC %.4f, NMI %.4f, Purity %.4f\n', ...
-                r, runs, temp_acc(r), temp_nmi(r), temp_purity(r));
         end
         time = toc;
 
@@ -172,7 +169,6 @@ for each_data = 1:numel(data_names)
     progress.status = 'complete';
     save(progress_file, 'progress');
 
-    fprintf('%s coarse search finished.\n', dataset);
 end
 
 fprintf('\nSPRSNMF coarse search finished for all selected datasets.\n');

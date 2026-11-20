@@ -21,15 +21,12 @@ layout = tiledlayout(numel(datasets), 2, ...
 
 for d = 1:numel(datasets)
     dataset = datasets{d};
-    fprintf('\nDataset: %s\n', dataset);
 
     [X, Y, info] = load_dataset(rootDir, dataset);
     c = info.classes;
     Y = Y(:);
 
     [alpha, lambda, beta, k] = read_SPRSNMF_best_params(rootDir, dataset);
-    fprintf('Use parameters: alpha=%g, lambda=%g, beta=%g, k=%g\n', ...
-        alpha, lambda, beta, k);
 
     % Fixed seeds make SPRSNMF initialization and t-SNE reproducible.
     rng(20260813 + d * 100, 'twister');
@@ -40,7 +37,6 @@ for d = 1:numel(datasets)
     f2d = reduce_to_2d(F);
 
     nexttile(layout, 2 * d - 1);
-    draw_scatter(raw2d, Y, c);
     title(sprintf('(%c)  the original data %s', char('a' + 2 * d - 2), dataset), ...
         'FontName', 'Times New Roman', 'FontSize', 12, 'FontWeight', 'bold');
 

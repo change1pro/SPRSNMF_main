@@ -10,6 +10,7 @@ summary_file = fullfile(result_folder, ...
 
 data_names = {'att', 'UMIST', 'JAFFE'};
 method_names = {'RNMF', 'SPRSNMF'};
+display_names = {'RNMF', 'SPRSNMF'};
 metric_columns = {'ACCMean', 'NMIMean', 'PurityMean'};
 metric_names = {'ACC', 'NMI', 'Purity'};
 
@@ -39,7 +40,6 @@ metric_data = read_plot_data(summary_table, data_names, ...
     method_names, plot_noise_variances, metric_columns);
 
 colors = [0.12, 0.43, 0.70; 0.82, 0.25, 0.18];
-markers = {'d', 'o'};
 plot_x = 1:numel(plot_noise_variances);
 n_data = numel(data_names);
 n_methods = numel(method_names);
@@ -94,7 +94,7 @@ for data_index = 1:n_data
     end
 end
 
-lgd = legend(legend_handles, method_names, ...
+lgd = legend(legend_handles, display_names, ...
     'Orientation', 'horizontal', 'Box', 'off');
 lgd.Layout.Tile = 'north';
 lgd.FontName = 'Times New Roman';
@@ -135,7 +135,13 @@ noise_column = str2double(string(summary_table.NoiseVariance));
 for data_index = 1:n_data
     dataset_match = strcmpi(dataset_column, data_names{data_index});
     for method_index = 1:n_methods
-        method_match = strcmpi(method_column, method_names{method_index});
+        if strcmpi(method_names{method_index}, 'SPRSNMF')
+            method_match = strcmpi(method_column, 'SPRSNMF') ...
+                | strcmpi(method_column, 'SPRSNMF');
+        else
+            method_match = strcmpi(method_column, ...
+                method_names{method_index});
+        end
 
         for noise_index = 1:n_noise
             tolerance = max(1e-12, ...

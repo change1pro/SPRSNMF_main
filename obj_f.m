@@ -13,7 +13,6 @@ end
 
 for each_data = 1:numel(data_names)
     dataset = data_names{each_data};
-    disp(['Plotting for dataset: ', dataset]);
 
     data_folder = fullfile(obj_folder, dataset, 'all_params');
     if exist(data_folder, 'dir') == 0

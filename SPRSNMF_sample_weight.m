@@ -53,12 +53,10 @@ plot_all_datasets(summary, datasets, percentSteps, 'Purity', ...
     fullfile(outDir, 'SPRSNMF_yang_fig9_all_datasets_Purity_summary_only'));
 
 fprintf('Figures regenerated directly from:\n%s\n', summaryFile);
-fprintf('No experiment was rerun. No 2-by-3 figure was generated.\n');
 
 
 function plot_all_datasets(summary, datasets, percentSteps, ...
     metricName, outBase)
-meanField = [metricName '_mean'];
 fig = figure('Color', 'w', 'Position', [55, 35, 1280, 900]);
 layout = tiledlayout(3, 3, 'TileSpacing', 'compact', ...
     'Padding', 'compact');

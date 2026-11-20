@@ -1,7 +1,7 @@
 clear
 clc
 
-rootDir = fileparts(mfilename('fullpath'));
+rootDir = 'D:\matlab-lhb\SPRSNMF';
 addpath(fullfile(rootDir, 'utils'), '-begin');
 addpath(fullfile(rootDir, 'core'), '-begin');
 
@@ -22,7 +22,6 @@ summaryRows = {};
 
 for d = 1:numel(datasets)
     dataset = datasets{d};
-    fprintf('\nSearching best-shaped convergence curve for %s...\n', dataset);
 
     modelFiles = dir(fullfile(coarseDir, dataset, ...
         'alpha-*', 'beta-*', 'lambda-*', 'k-*', 'model.mat'));
@@ -87,8 +86,6 @@ for d = 1:numel(datasets)
         bestCurve(1), bestCurve(end), alphaVal, betaVal, lambdaVal, kVal, ...
         bestInfo.decreaseRatio, bestInfo.violationRatio, bestInfo.smoothness, bestScore};
 
-    fprintf('  selected: alpha=%g, beta=%g, lambda=%g, k=%g, score=%.4f\n', ...
-        alphaVal, betaVal, lambdaVal, kVal, bestScore);
 end
 
 pngFile = fullfile(outDir, 'SPRSNMF_convergence_9datasets_bestshape.png');

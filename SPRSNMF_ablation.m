@@ -59,10 +59,8 @@ for variantIndex = 1:numel(variants)
     parameterGrid = make_parameter_grid(variant.key, ...
         parameterValues, kValues);
 
-    fprintf('\n============================================================\n');
     fprintf('Variant: %s | coarse combinations per dataset: %d\n', ...
         variant.label, height(parameterGrid));
-    fprintf('============================================================\n');
 
     for datasetIndex = 1:numel(dataNames)
         dataset = dataNames{datasetIndex};
@@ -96,7 +94,6 @@ end
 summaryFile = write_combined_summary(rootDir, outputRoot, ...
     variants, dataNames);
 
-fprintf('\nAll requested ablation searches are complete.\n');
 fprintf('Combined summary:\n%s\n', summaryFile);
 
 
@@ -231,7 +228,6 @@ function run_validation(variant, topTable, X, Y, info, c, ...
 for rankIndex = 1:height(topTable)
     settingFolder = fullfile(validationFolder, ...
         sprintf('rank-%03d', rankIndex));
-    ensure_folder(settingFolder);
 
     modelFile = fullfile(settingFolder, 'model.mat');
     partialFile = fullfile(settingFolder, 'partial.mat');
@@ -325,10 +321,6 @@ for runIndex = 1:runs
             'tempTime', 'objCell', 'doneRuns', 'params', ...
             'runs', 'stage');
 
-        fprintf(['  run %02d/%02d: ACC %.4f, NMI %.4f, ' ...
-            'Purity %.4f, time %.2fs\n'], runIndex, runs, ...
-            tempAcc(runIndex), tempNmi(runIndex), ...
-            tempPurity(runIndex), tempTime(runIndex));
     catch ME
         failure.identifier = ME.identifier;
         failure.message = ME.message;

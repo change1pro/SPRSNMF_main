@@ -18,7 +18,6 @@ end
 
 for each_data = 1:numel(data_names)
     dataset = data_names{each_data};
-    disp(dataset)
 
     [X, ~, info] = load_dataset(pwd, dataset);
     c = info.classes;
