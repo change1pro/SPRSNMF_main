@@ -2,10 +2,6 @@
 
 ## Self-Paced Robust Sparse Non-Negative Matrix Factorization with Optimal Graph Learning
 
-Jianyu Miao, Huibo Liu, Liping Yu, Ning Li, and Huiying Hou
-
-*Big Data and Cognitive Computing*, 2026, 10, 379.
-
 [DOI: 10.3390/bdcc10110379](https://doi.org/10.3390/bdcc10110379)
 
 ## Abstract
