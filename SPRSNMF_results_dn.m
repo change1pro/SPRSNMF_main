@@ -19,7 +19,7 @@ data_names = {'YaleB_32x32'};
 
 
 
-result_folder = fullfile(rootDir, 'SPLAGNMF_results_coarse');
+result_folder = fullfile(rootDir, 'SPRSNMF_results_coarse');
 if exist(result_folder, 'dir') == 0
     mkdir(result_folder);
 end
@@ -124,7 +124,7 @@ for each_data = 1:numel(data_names)
             rng(20260610 + each_data * 100000 + ...
                 i * 10000 + j * 1000 + t * 100 + q * 10 + r);
 
-            [F, obj] = splagnmf(X, c, alpha, lambda, beta, k);
+            [F, obj] = SPRSNMF(X, c, alpha, lambda, beta, k);
             pred = cluster_embedding(F, c);
             metric = clustering_metrics(Y, pred);
 
@@ -175,4 +175,4 @@ for each_data = 1:numel(data_names)
     fprintf('%s coarse search finished.\n', dataset);
 end
 
-fprintf('\nSPLAGNMF coarse search finished for all selected datasets.\n');
+fprintf('\nSPRSNMF coarse search finished for all selected datasets.\n');

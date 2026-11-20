@@ -1,4 +1,4 @@
-function F = update_f_splagnmf(X, B, W, Ds, d, F, alpha, beta, innerF, epsv)
+function F = update_f_SPRSNMF(X, B, W, Ds, d, F, alpha, beta, innerF, epsv)
 Q = diag(1 ./ (4 * (sum(F.^2, 2) + epsv).^(3/4)));
 BtB = B' * B;
 DXtB = (d .* X') * B;

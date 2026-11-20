@@ -1,14 +1,14 @@
 clear
 clc
 
-rootDir = 'D:\matlab-lhb\SPLAGNMF';
+rootDir = fileparts(mfilename('fullpath'));
 addpath(fullfile(rootDir, 'utils'), '-begin');
 addpath(fullfile(rootDir, 'core'), '-begin');
 
 datasets = {'att','UMIST','JAFFE','oh15','GLIOMA','BA', ...
     'lymphoma','lung','colon'};
 
-coarseDir = fullfile(rootDir, 'SPLAGNMF_results_coarse');
+coarseDir = fullfile(rootDir, 'SPRSNMF_results_coarse');
 outDir = fullfile(rootDir, 'plot_objimg');
 if exist(outDir, 'dir') == 0
     mkdir(outDir);
@@ -91,10 +91,10 @@ for d = 1:numel(datasets)
         alphaVal, betaVal, lambdaVal, kVal, bestScore);
 end
 
-pngFile = fullfile(outDir, 'SPLAGNMF_convergence_9datasets_bestshape.png');
-pdfFile = fullfile(outDir, 'SPLAGNMF_convergence_9datasets_bestshape_solid.pdf');
-figFile = fullfile(outDir, 'SPLAGNMF_convergence_9datasets_bestshape_solid.fig');
-csvOut = fullfile(outDir, 'SPLAGNMF_convergence_9datasets_bestshape_solid_summary.csv');
+pngFile = fullfile(outDir, 'SPRSNMF_convergence_9datasets_bestshape.png');
+pdfFile = fullfile(outDir, 'SPRSNMF_convergence_9datasets_bestshape_solid.pdf');
+figFile = fullfile(outDir, 'SPRSNMF_convergence_9datasets_bestshape_solid.fig');
+csvOut = fullfile(outDir, 'SPRSNMF_convergence_9datasets_bestshape_solid_summary.csv');
 
 exportgraphics(gcf, pngFile, 'Resolution', 300);
 exportgraphics(gcf, pdfFile, 'ContentType', 'vector');

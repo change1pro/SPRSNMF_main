@@ -6,7 +6,7 @@ addpath(genpath(rootDir));
 addpath(fullfile(rootDir, 'utils'), '-begin');
 addpath(fullfile(rootDir, 'core'), '-begin');
 
-quickTest = strcmp(getenv('SPLAGNMF_ABLATION_QUICK_TEST'), '1');
+quickTest = strcmp(getenv('SPRSNMF_ABLATION_QUICK_TEST'), '1');
 
 dataNames = {'att', 'UMIST', 'JAFFE', 'oh15', 'GLIOMA', ...
     'BA', 'lymphoma', 'lung', 'colon'};
@@ -23,9 +23,9 @@ if quickTest
     coarseRuns = 1;
     validationRuns = 1;
     topNumber = 1;
-    outputRoot = fullfile(tempdir, 'SPLAGNMF_ablation_search_quick_test');
+    outputRoot = fullfile(tempdir, 'SPRSNMF_ablation_search_quick_test');
 else
-    outputRoot = fullfile(rootDir, 'SPLAGNMF_ablation_search');
+    outputRoot = fullfile(rootDir, 'SPRSNMF_ablation_search');
 end
 
 if exist(outputRoot, 'dir') == 0
@@ -35,9 +35,9 @@ end
 variants = struct( ...
     'key', {'without_graph', 'without_sparse', 'without_spl'}, ...
     'label', {'w/o Graph', 'w/o Sparse', 'w/o SPL'}, ...
-    'method', {@splagnmf_without_graph, ...
-               @splagnmf_without_sparse, ...
-               @splagnmf_without_spl});
+    'method', {@SPRSNMF_without_graph, ...
+               @SPRSNMF_without_sparse, ...
+               @SPRSNMF_without_spl});
 
 config.protocol = 'strict-independent-tuning-v1';
 config.dataNames = dataNames;
@@ -454,7 +454,7 @@ for variantIndex = 1:numel(variants)
     end
 end
 
-summaryFile = fullfile(outputRoot, 'SPLAGNMF_ablation_best_summary.csv');
+summaryFile = fullfile(outputRoot, 'SPRSNMF_ablation_best_summary.csv');
 if isempty(rows)
     return;
 end
@@ -471,8 +471,8 @@ end
 function rows = collect_full_model_rows(rootDir, outputRoot, dataNames)
 rows = {};
 cacheFile = fullfile(outputRoot, 'Full_best_summary_cache.csv');
-officialFile = fullfile(rootDir, 'SPLAGNMF_top_validate', ...
-    'SPLAGNMF_top_validate_best.csv');
+officialFile = fullfile(rootDir, 'SPRSNMF_top_validate', ...
+    'SPRSNMF_top_validate_best.csv');
 
 if exist(officialFile, 'file') == 2
     fullTable = readtable(officialFile, 'TextType', 'string');
@@ -491,7 +491,7 @@ end
 
 for datasetIndex = 1:numel(dataNames)
     dataset = dataNames{datasetIndex};
-    validationFolder = fullfile(rootDir, 'SPLAGNMF_top_validate', dataset);
+    validationFolder = fullfile(rootDir, 'SPRSNMF_top_validate', dataset);
     modelFiles = dir(fullfile(validationFolder, '**', 'model.mat'));
     bestModel = [];
     bestFile = '';

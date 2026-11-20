@@ -4,13 +4,12 @@ close all
 
 rootDir = fileparts(mfilename('fullpath'));
 result_folder = fullfile(rootDir, 'visualization_results', ...
-    'robustness_gaussian_variance_rnmf_splagnmf_v2');
+    'robustness_gaussian_variance_rnmf_SPRSNMF_v2');
 summary_file = fullfile(result_folder, ...
-    'RNMF_SPLAGNMF_gaussian_summary.xlsx');
+    'RNMF_SPRSNMF_gaussian_summary.xlsx');
 
 data_names = {'att', 'UMIST', 'JAFFE'};
-method_names = {'RNMF', 'SPLAGNMF'};
-display_names = {'RNMF', 'SPRSNMF'};
+method_names = {'RNMF', 'SPRSNMF'};
 metric_columns = {'ACCMean', 'NMIMean', 'PurityMean'};
 metric_names = {'ACC', 'NMI', 'Purity'};
 
@@ -95,7 +94,7 @@ for data_index = 1:n_data
     end
 end
 
-lgd = legend(legend_handles, display_names, ...
+lgd = legend(legend_handles, method_names, ...
     'Orientation', 'horizontal', 'Box', 'off');
 lgd.Layout.Tile = 'north';
 lgd.FontName = 'Times New Roman';
@@ -136,13 +135,7 @@ noise_column = str2double(string(summary_table.NoiseVariance));
 for data_index = 1:n_data
     dataset_match = strcmpi(dataset_column, data_names{data_index});
     for method_index = 1:n_methods
-        if strcmpi(method_names{method_index}, 'SPLAGNMF')
-            method_match = strcmpi(method_column, 'SPLAGNMF') ...
-                | strcmpi(method_column, 'SPRSNMF');
-        else
-            method_match = strcmpi(method_column, ...
-                method_names{method_index});
-        end
+        method_match = strcmpi(method_column, method_names{method_index});
 
         for noise_index = 1:n_noise
             tolerance = max(1e-12, ...

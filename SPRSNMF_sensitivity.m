@@ -2,7 +2,7 @@ clear
 clc
 
 rootDir = fileparts(mfilename('fullpath'));
-paramDir = fullfile(rootDir, 'SPLAGNMF_top_params');
+paramDir = fullfile(rootDir, 'SPRSNMF_top_params');
 outDir = fullfile(rootDir, 'visualization_results', ...
     'alpha_lambda_sensitivity');
 if exist(outDir, 'dir') == 0
@@ -13,9 +13,9 @@ datasets = {'att','UMIST','JAFFE','oh15','GLIOMA', ...
     'BA','lymphoma','lung','colon'};
 metricNames = {'ACC_mean','NMI_mean','Purity_mean'};
 metricLabels = {'ACC','NMI','Purity'};
-figureNames = {'SPLAGNMF_alpha_lambda_ACC', ...
-    'SPLAGNMF_alpha_lambda_NMI', ...
-    'SPLAGNMF_alpha_lambda_Purity'};
+figureNames = {'SPRSNMF_alpha_lambda_ACC', ...
+    'SPRSNMF_alpha_lambda_NMI', ...
+    'SPRSNMF_alpha_lambda_Purity'};
 
 % One color for each alpha value, from blue to yellow.
 rowColors = [ ...
@@ -147,7 +147,7 @@ end
 fixedTable = cell2table(fixed_rows, ...
     'VariableNames', {'Dataset','Fixed_beta','Fixed_k','Grid_rows'});
 writetable(fixedTable, ...
-    fullfile(outDir, 'SPLAGNMF_alpha_lambda_fixed_parameters.csv'));
+    fullfile(outDir, 'SPRSNMF_alpha_lambda_fixed_parameters.csv'));
 
 fprintf('Alpha-lambda sensitivity figures will be saved to:\n%s\n', outDir);
 

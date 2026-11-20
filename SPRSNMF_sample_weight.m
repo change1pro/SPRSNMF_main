@@ -5,7 +5,7 @@ rootDir = fileparts(mfilename('fullpath'));
 outDir = fullfile(rootDir, 'visualization_results', ...
     'selfpaced_growth_ratio_yang_fig9');
 summaryFile = fullfile(outDir, ...
-    'SPLAGNMF_yang_fig9_growth_ratio_summary.xlsx');
+    'SPRSNMF_yang_fig9_growth_ratio_summary.xlsx');
 
 if exist(summaryFile, 'file') ~= 2
     error('Summary table not found: %s', summaryFile);
@@ -46,11 +46,11 @@ for d = 1:numel(datasets)
 end
 
 plot_all_datasets(summary, datasets, percentSteps, 'ACC', ...
-    fullfile(outDir, 'SPLAGNMF_yang_fig9_all_datasets_ACC_summary_only'));
+    fullfile(outDir, 'SPRSNMF_yang_fig9_all_datasets_ACC_summary_only'));
 plot_all_datasets(summary, datasets, percentSteps, 'NMI', ...
-    fullfile(outDir, 'SPLAGNMF_yang_fig9_all_datasets_NMI_summary_only'));
+    fullfile(outDir, 'SPRSNMF_yang_fig9_all_datasets_NMI_summary_only'));
 plot_all_datasets(summary, datasets, percentSteps, 'Purity', ...
-    fullfile(outDir, 'SPLAGNMF_yang_fig9_all_datasets_Purity_summary_only'));
+    fullfile(outDir, 'SPRSNMF_yang_fig9_all_datasets_Purity_summary_only'));
 
 fprintf('Figures regenerated directly from:\n%s\n', summaryFile);
 fprintf('No experiment was rerun. No 2-by-3 figure was generated.\n');

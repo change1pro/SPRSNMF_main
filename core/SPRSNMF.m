@@ -1,5 +1,5 @@
-function [F, obj] = splagnmf(X, c, alpha, lambda, beta, k)
-%SPLAGNMF Self-paced adaptive graph sparse NMF.
+function [F, obj] = SPRSNMF(X, c, alpha, lambda, beta, k)
+%SPRSNMF Self-paced adaptive graph sparse NMF.
 
 %% 初始化
 maxIter = 80;
@@ -89,7 +89,7 @@ for iter = 1:maxIter
     Ds = diag(sum(W, 2));
 
     B = update_B(X, F, D, B, innerB, epsv);
-    F = update_f_splagnmf(X, B, W, Ds, D, F, alpha, beta, innerF, epsv);
+    F = update_f_SPRSNMF(X, B, W, Ds, D, F, alpha, beta, innerF, epsv);
 
     [~, labelF] = max(F, [], 2);
     F0 = epsv * ones(n, c);

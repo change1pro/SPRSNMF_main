@@ -44,7 +44,7 @@ for each_data = 1:numel(data_names)
                         continue;
                     end
 
-                    [~, obj] = splagnmf(X, c, alpha, lambda, beta, k);
+                    [~, obj] = SPRSNMF(X, c, alpha, lambda, beta, k);
                     save(filename, 'obj', 'alpha', 'beta', 'lambda', 'k');
                 end
             end

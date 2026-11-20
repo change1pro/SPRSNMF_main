@@ -27,13 +27,13 @@ for d = 1:numel(datasets)
     c = info.classes;
     Y = Y(:);
 
-    [alpha, lambda, beta, k] = read_splagnmf_best_params(rootDir, dataset);
+    [alpha, lambda, beta, k] = read_SPRSNMF_best_params(rootDir, dataset);
     fprintf('Use parameters: alpha=%g, lambda=%g, beta=%g, k=%g\n', ...
         alpha, lambda, beta, k);
 
-    % Fixed seeds make SPLAGNMF initialization and t-SNE reproducible.
+    % Fixed seeds make SPRSNMF initialization and t-SNE reproducible.
     rng(20260813 + d * 100, 'twister');
-    [F, ~] = splagnmf(X, c, alpha, lambda, beta, k);
+    [F, ~] = SPRSNMF(X, c, alpha, lambda, beta, k);
     pred = cluster_embedding(F, c);
 
     raw2d = reduce_to_2d(X');
@@ -66,23 +66,23 @@ for a = 1:numel(plotAxes)
     ax.YTickLabel = strrep(ax.YTickLabel, '-', char(8722));
 end
 
-exportgraphics(gcf, fullfile(outDir, 'SPLAGNMF_clustering_visualization.png'), ...
+exportgraphics(gcf, fullfile(outDir, 'SPRSNMF_clustering_visualization.png'), ...
     'Resolution', 300);
-savefig(gcf, fullfile(outDir, 'SPLAGNMF_clustering_visualization.fig'));
-exportgraphics(gcf, fullfile(outDir, 'SPLAGNMF_clustering_visualization.pdf'), ...
+savefig(gcf, fullfile(outDir, 'SPRSNMF_clustering_visualization.fig'));
+exportgraphics(gcf, fullfile(outDir, 'SPRSNMF_clustering_visualization.pdf'), ...
     'ContentType', 'vector');
 
 coordTable = cell2table(allRows, 'VariableNames', ...
     {'Dataset', 'SampleIndex', 'TrueLabel', 'PredLabel', ...
     'RawDim1', 'RawDim2', 'FDim1', 'FDim2', ...
     'alpha', 'lambda', 'beta', 'k'});
-writetable(coordTable, fullfile(outDir, 'SPLAGNMF_clustering_visualization_coordinates.csv'));
+writetable(coordTable, fullfile(outDir, 'SPRSNMF_clustering_visualization_coordinates.csv'));
 
 fprintf('\nClustering visualization saved to:\n%s\n', outDir);
 
-function [alpha, lambda, beta, k] = read_splagnmf_best_params(rootDir, dataset)
+function [alpha, lambda, beta, k] = read_SPRSNMF_best_params(rootDir, dataset)
 
-file = fullfile(rootDir, 'SPLAGNMF_top_params', [dataset '_top50_params.csv']);
+file = fullfile(rootDir, 'SPRSNMF_top_params', [dataset '_top50_params.csv']);
 
 T = readtable(file);
 [~, idx] = max(T.Score_mean);
